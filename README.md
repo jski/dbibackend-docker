@@ -13,8 +13,8 @@ A Docker-based HTTP server setup for Nintendo Switch DBI network installations.
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/jski/dbi-server-docker
-cd dbi-server-docker
+git clone https://github.com/jski/dbibackend-docker
+cd dbibackend-docker
 ```
 
 2. Create the games directory structure:
