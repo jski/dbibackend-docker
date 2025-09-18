@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  nginx:
+    build: .
+    ports:
+      - "65080:80"
+    volumes:
+      - ./nsw_games:/var/www/html/nsw_games:ro
+    restart: unless-stopped
+    networks:
+      - dbi-network
+
+networks:
+  dbi-network:
+    driver: bridge
