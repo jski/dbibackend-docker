@@ -1,11 +1,13 @@
-version: '3.8'
 services:
   nginx:
     build: .
     ports:
       - "65080:80"
     volumes:
-      - ./nsw_games:/var/www/html/nsw_games:ro
+      # Option A (remote share): mount CIFS/SMB as a named volume.
+      - cifs_mount:/var/www/html/nsw_games:ro
+      # Option B (local folder): bind-mount ./nsw_games from this repo.
+      # - ./nsw_games:/var/www/html/nsw_games:ro
     restart: unless-stopped
     networks:
       - dbi-network
@@ -13,3 +15,12 @@ services:
 networks:
   dbi-network:
     driver: bridge
+
+volumes:
+  cifs_mount:
+    driver: local
+    driver_opts:
+      type: cifs
+      # Update credentials and share path for your NAS.
+      o: username=${CIFS_USERNAME},password=${CIFS_PASSWORD}
+      device: ${CIFS_DEVICE}
